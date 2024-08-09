@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BookListUsecaseProtocol {
+public protocol BookListUsecaseProtocol {
     func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError>
 }
 public struct BookListUsecase: BookListUsecaseProtocol {

@@ -7,23 +7,23 @@
 
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
 }
 
-protocol NetworkManagerProtocol {
+public protocol NetworkManagerProtocol {
     func fetchData<T: Decodable>(urlString: String, httpMethod: HTTPMethod, headers: [String: String]?) async -> Result<T,NetworkError>
 }
 
-struct NetworkManager: NetworkManagerProtocol {
+public struct NetworkManager: NetworkManagerProtocol {
     private let session: URLSessionProtocol
-    init(session: URLSessionProtocol) {
+    public init(session: URLSessionProtocol) {
         self.session = session
         
     }
     
-    func fetchData<T: Decodable>(urlString: String, httpMethod: HTTPMethod, headers: [String: String]?) async -> Result<T,NetworkError> {
+    public func fetchData<T: Decodable>(urlString: String, httpMethod: HTTPMethod, headers: [String: String]?) async -> Result<T,NetworkError> {
         
         guard let url = URL(string: urlString) else {
             return .failure(NetworkError.urlError(urlString))

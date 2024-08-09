@@ -8,8 +8,8 @@
 import Foundation
 
 public struct BookList: Decodable {
-    private let totalItems: Int
-    private let items: [BookListItem]
+    let totalItems: Int
+    let items: [BookListItem]
     
     enum CodingKeys: CodingKey {
         case totalItems
