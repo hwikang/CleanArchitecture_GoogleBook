@@ -11,7 +11,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let session = BookURLSession()
+
+        let bookNetwork = BookNetwork(network: NetworkManager(session: session))
+        Task {
+            let result = await bookNetwork.searchBooks(query: "ios", filter: .freeEbook, pageIndex: 1)
+            print(result)
+        }
     }
 
 

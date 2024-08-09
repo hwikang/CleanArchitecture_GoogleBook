@@ -17,6 +17,12 @@
 		F8D8E0552C66299300F58A05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8D8E0542C66299300F58A05 /* Assets.xcassets */; };
 		F8D8E0582C66299300F58A05 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = F8D8E0572C66299300F58A05 /* Base */; };
 		F8D8E0632C66299300F58A05 /* kidsbookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0622C66299300F58A05 /* kidsbookTests.swift */; };
+		F8D8E07E2C662B0800F58A05 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E07D2C662B0800F58A05 /* NetworkManager.swift */; };
+		F8D8E0822C662B2900F58A05 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0812C662B2900F58A05 /* NetworkError.swift */; };
+		F8D8E0842C662B4A00F58A05 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0832C662B4A00F58A05 /* URLSessionProtocol.swift */; };
+		F8D8E0862C662BB900F58A05 /* BookNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0852C662BB900F58A05 /* BookNetwork.swift */; };
+		F8D8E0882C662C5300F58A05 /* BookListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0872C662C5300F58A05 /* BookListItem.swift */; };
+		F8D8E08B2C663B2E00F58A05 /* BookSearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E08A2C663B2E00F58A05 /* BookSearchFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,12 @@
 		F8D8E0592C66299300F58A05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8D8E05E2C66299300F58A05 /* kidsbookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kidsbookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8D8E0622C66299300F58A05 /* kidsbookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kidsbookTests.swift; sourceTree = "<group>"; };
+		F8D8E07D2C662B0800F58A05 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F8D8E0812C662B2900F58A05 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		F8D8E0832C662B4A00F58A05 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		F8D8E0852C662BB900F58A05 /* BookNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookNetwork.swift; sourceTree = "<group>"; };
+		F8D8E0872C662C5300F58A05 /* BookListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListItem.swift; sourceTree = "<group>"; };
+		F8D8E08A2C663B2E00F58A05 /* BookSearchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +89,6 @@
 				598DA5C33A992BD9E20720AA /* Pods-kidsbookTests.debug.xcconfig */,
 				78930F4A2A1F942F6BE42ACC /* Pods-kidsbookTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -116,6 +127,8 @@
 				F8D8E0482C66299200F58A05 /* AppDelegate.swift */,
 				F8D8E04A2C66299200F58A05 /* SceneDelegate.swift */,
 				F8D8E04C2C66299200F58A05 /* ViewController.swift */,
+				F8D8E07F2C662B1500F58A05 /* Domain */,
+				F8D8E07B2C662AFA00F58A05 /* Data */,
 				F8D8E04E2C66299200F58A05 /* Main.storyboard */,
 				F8D8E0542C66299300F58A05 /* Assets.xcassets */,
 				F8D8E0562C66299300F58A05 /* LaunchScreen.storyboard */,
@@ -131,6 +144,50 @@
 				F8D8E0622C66299300F58A05 /* kidsbookTests.swift */,
 			);
 			path = kidsbookTests;
+			sourceTree = "<group>";
+		};
+		F8D8E07B2C662AFA00F58A05 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E07C2C662B0000F58A05 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		F8D8E07C2C662B0000F58A05 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E07D2C662B0800F58A05 /* NetworkManager.swift */,
+				F8D8E0832C662B4A00F58A05 /* URLSessionProtocol.swift */,
+				F8D8E0852C662BB900F58A05 /* BookNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F8D8E07F2C662B1500F58A05 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E0802C662B1D00F58A05 /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		F8D8E0802C662B1D00F58A05 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E0812C662B2900F58A05 /* NetworkError.swift */,
+				F8D8E0892C663B1D00F58A05 /* Book */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		F8D8E0892C663B1D00F58A05 /* Book */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E0872C662C5300F58A05 /* BookListItem.swift */,
+				F8D8E08A2C663B2E00F58A05 /* BookSearchFilter.swift */,
+			);
+			path = Book;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,9 +358,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D8E0842C662B4A00F58A05 /* URLSessionProtocol.swift in Sources */,
+				F8D8E0862C662BB900F58A05 /* BookNetwork.swift in Sources */,
 				F8D8E04D2C66299200F58A05 /* ViewController.swift in Sources */,
+				F8D8E0882C662C5300F58A05 /* BookListItem.swift in Sources */,
 				F8D8E0492C66299200F58A05 /* AppDelegate.swift in Sources */,
+				F8D8E07E2C662B0800F58A05 /* NetworkManager.swift in Sources */,
+				F8D8E0822C662B2900F58A05 /* NetworkError.swift in Sources */,
 				F8D8E04B2C66299200F58A05 /* SceneDelegate.swift in Sources */,
+				F8D8E08B2C663B2E00F58A05 /* BookSearchFilter.swift in Sources */,
 				F8D8E0532C66299200F58A05 /* kidsbook.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,6 +537,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L3B9L4FDBB;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kidsbook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -503,6 +567,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L3B9L4FDBB;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kidsbook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
