@@ -1,0 +1,24 @@
+//
+//  BookListUsecase.swift
+//  kidsbook
+//
+//  Created by paytalab on 8/9/24.
+//
+
+import Foundation
+
+protocol BookListUsecaseProtocol {
+    func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError>
+}
+public struct BookListUsecase: BookListUsecaseProtocol {
+    
+    private let repository: BookRepositoryProtocol
+    public init(repository: BookRepositoryProtocol) {
+        self.repository = repository
+    }
+    
+    public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError> {
+        await repository.searchBooks(query: query, filter: filter, pageIndex: pageIndex)
+    }
+    
+}

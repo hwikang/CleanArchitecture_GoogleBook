@@ -23,6 +23,9 @@
 		F8D8E0862C662BB900F58A05 /* BookNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0852C662BB900F58A05 /* BookNetwork.swift */; };
 		F8D8E0882C662C5300F58A05 /* BookListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0872C662C5300F58A05 /* BookListItem.swift */; };
 		F8D8E08B2C663B2E00F58A05 /* BookSearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E08A2C663B2E00F58A05 /* BookSearchFilter.swift */; };
+		F8D8E08F2C664EF100F58A05 /* BookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E08E2C664EF100F58A05 /* BookRepository.swift */; };
+		F8D8E0922C66556800F58A05 /* BookRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0912C66556800F58A05 /* BookRepositoryProtocol.swift */; };
+		F8D8E0942C66564B00F58A05 /* BookListUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0932C66564B00F58A05 /* BookListUsecase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		F8D8E0852C662BB900F58A05 /* BookNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookNetwork.swift; sourceTree = "<group>"; };
 		F8D8E0872C662C5300F58A05 /* BookListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListItem.swift; sourceTree = "<group>"; };
 		F8D8E08A2C663B2E00F58A05 /* BookSearchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchFilter.swift; sourceTree = "<group>"; };
+		F8D8E08E2C664EF100F58A05 /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
+		F8D8E0912C66556800F58A05 /* BookRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepositoryProtocol.swift; sourceTree = "<group>"; };
+		F8D8E0932C66564B00F58A05 /* BookListUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListUsecase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,7 @@
 		F8D8E07B2C662AFA00F58A05 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				F8D8E08D2C664EE300F58A05 /* Repository */,
 				F8D8E07C2C662B0000F58A05 /* Network */,
 			);
 			path = Data;
@@ -167,6 +174,8 @@
 		F8D8E07F2C662B1500F58A05 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F8D8E0902C66555700F58A05 /* RepositoryProtocol */,
+				F8D8E08C2C664ED900F58A05 /* Usecase */,
 				F8D8E0802C662B1D00F58A05 /* Entity */,
 			);
 			path = Domain;
@@ -188,6 +197,30 @@
 				F8D8E08A2C663B2E00F58A05 /* BookSearchFilter.swift */,
 			);
 			path = Book;
+			sourceTree = "<group>";
+		};
+		F8D8E08C2C664ED900F58A05 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E0932C66564B00F58A05 /* BookListUsecase.swift */,
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
+		F8D8E08D2C664EE300F58A05 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E08E2C664EF100F58A05 /* BookRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		F8D8E0902C66555700F58A05 /* RepositoryProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E0912C66556800F58A05 /* BookRepositoryProtocol.swift */,
+			);
+			path = RepositoryProtocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,7 +399,10 @@
 				F8D8E07E2C662B0800F58A05 /* NetworkManager.swift in Sources */,
 				F8D8E0822C662B2900F58A05 /* NetworkError.swift in Sources */,
 				F8D8E04B2C66299200F58A05 /* SceneDelegate.swift in Sources */,
+				F8D8E0922C66556800F58A05 /* BookRepositoryProtocol.swift in Sources */,
 				F8D8E08B2C663B2E00F58A05 /* BookSearchFilter.swift in Sources */,
+				F8D8E08F2C664EF100F58A05 /* BookRepository.swift in Sources */,
+				F8D8E0942C66564B00F58A05 /* BookListUsecase.swift in Sources */,
 				F8D8E0532C66299200F58A05 /* kidsbook.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

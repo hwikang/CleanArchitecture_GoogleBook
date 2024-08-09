@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BookSearchFilter: String {
+public enum BookSearchFilter: String {
     case freeEbook = "free-ebooks"
     case paidEbook = "paid-ebooks"
 }

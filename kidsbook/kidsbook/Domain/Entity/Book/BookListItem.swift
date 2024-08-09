@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct BookList: Decodable {
-    var totalItems: Int
-    let items: [BookListItem]
+public struct BookList: Decodable {
+    private let totalItems: Int
+    private let items: [BookListItem]
     
     enum CodingKeys: CodingKey {
         case totalItems
         case items
     }
-    init(totalItems: Int, books: [BookListItem]) {
+    public init(totalItems: Int, books: [BookListItem]) {
         self.totalItems = totalItems
         self.items = books
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.totalItems = try container.decode(Int.self, forKey: CodingKeys.totalItems)
         items = try container.decode([BookListItem].self, forKey: CodingKeys.items)
@@ -28,7 +28,7 @@ struct BookList: Decodable {
    
 }
 
-struct BookListItem: Decodable {
+public struct BookListItem: Decodable {
     let identifier: String
     let title: String
     let authors: [String]
@@ -47,7 +47,7 @@ struct BookListItem: Decodable {
         case thumbnail
     }
     
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.identifier = try container.decode(String.self, forKey: .identifier)
         let infoContainer = try container.nestedContainer(keyedBy: InfoCodingKeys.self, forKey: .volumeInfo)
