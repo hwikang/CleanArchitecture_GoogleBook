@@ -40,7 +40,8 @@ final public class SearchTextField: UITextField {
          
          clearButton.rx.tap.bind { [weak self] in
              self?.text = nil
-             self?.sendActions(for: .valueChanged)
+             self?.sendActions(for: .editingDidEnd)
+            
          }.disposed(by: disposeBag)
     }
     required init?(coder: NSCoder) {

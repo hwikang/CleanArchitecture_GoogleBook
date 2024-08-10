@@ -29,6 +29,7 @@ class BookListViewController: UIViewController {
         tableView.register(TabTableViewCell.self, forCellReuseIdentifier: TabTableViewCell.identifier)
         tableView.register(BookListTableViewCell.self, forCellReuseIdentifier: BookListTableViewCell.identifier)
         tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: LoadingTableViewCell.identifier)
+        tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
         return tableView
     }()
     
@@ -43,14 +44,6 @@ class BookListViewController: UIViewController {
       
         setUI()
         bindViewModel()
-        let test = tableView.rx.willDisplayCell.filter { $0.cell is LoadingTableViewCell }.map { _ in () }
-//            .bind(onNext: { [weak self] displayCell in
-//                if displayCell.cell is LoadingCell {
-//                    self?.viewModel.getParticipationHistories(isPagination: true, isFromRefreshControl: false)
-//                }
-//            })
-//            .disposed(by: disposeBag)
-
 
     }
     
@@ -81,7 +74,7 @@ class BookListViewController: UIViewController {
             .bind(to: pullToRefreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
         
-        output.error.bind { [weak self] error in
+        output.error.observe(on: MainScheduler.instance).bind { [weak self] error in
             let alert = UIAlertController(title: "에러", message: error, preferredStyle: .alert)
             alert.addAction(.init(title: "확인", style: .default))
             self?.present(alert, animated: true)

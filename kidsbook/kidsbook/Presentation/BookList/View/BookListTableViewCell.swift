@@ -64,14 +64,15 @@ final class BookListTableViewCell : UITableViewCell, BookListCellType {
         }
         bookImage.snp.makeConstraints { make in
             make.top.equalTo(10)
-            make.leading.bottom.equalToSuperview()
+            make.leading.equalTo(16)
+            make.bottom.equalToSuperview()
             make.width.equalTo(100)
             make.height.equalTo(140)
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(bookImage)
             make.leading.equalTo(bookImage.snp.trailing).offset(8)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
         }
         authorLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom)

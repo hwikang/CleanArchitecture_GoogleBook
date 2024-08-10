@@ -16,6 +16,7 @@ final class TabTableViewCell : UITableViewCell, BookListCellType {
     public let selectedTab = PublishRelay<BookSearchFilter>()
     public var disposeBag = DisposeBag()
     private let internalDisposeBag = DisposeBag()
+
     private let freeEbookTab: UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle(BookSearchFilter.freeEbook.rawValue, for: .normal)

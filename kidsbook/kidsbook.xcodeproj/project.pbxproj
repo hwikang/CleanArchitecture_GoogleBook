@@ -31,6 +31,7 @@
 		F8D8E0A32C67157B00F58A05 /* ImageChacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0A22C67157B00F58A05 /* ImageChacheManager.swift */; };
 		F8D8E0C92C6722C300F58A05 /* TabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0C82C6722C300F58A05 /* TabTableViewCell.swift */; };
 		F8D8E0CB2C67303700F58A05 /* LoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0CA2C67303700F58A05 /* LoadingTableViewCell.swift */; };
+		F8D8E0CD2C6737C700F58A05 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0CC2C6737C700F58A05 /* TitleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		F8D8E0A22C67157B00F58A05 /* ImageChacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChacheManager.swift; sourceTree = "<group>"; };
 		F8D8E0C82C6722C300F58A05 /* TabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTableViewCell.swift; sourceTree = "<group>"; };
 		F8D8E0CA2C67303700F58A05 /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
+		F8D8E0CC2C6737C700F58A05 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 				F8D8E09A2C6711B800F58A05 /* SearchTextField.swift */,
 				F8D8E09C2C6713D400F58A05 /* BookListTableViewCell.swift */,
 				F8D8E0C82C6722C300F58A05 /* TabTableViewCell.swift */,
+				F8D8E0CC2C6737C700F58A05 /* TitleTableViewCell.swift */,
 				F8D8E0CA2C67303700F58A05 /* LoadingTableViewCell.swift */,
 			);
 			path = View;
@@ -451,6 +454,7 @@
 				F8D8E0882C662C5300F58A05 /* BookListItem.swift in Sources */,
 				F8D8E0492C66299200F58A05 /* AppDelegate.swift in Sources */,
 				F8D8E09B2C6711B800F58A05 /* SearchTextField.swift in Sources */,
+				F8D8E0CD2C6737C700F58A05 /* TitleTableViewCell.swift in Sources */,
 				F8D8E0982C66572200F58A05 /* BookListViewModel.swift in Sources */,
 				F8D8E07E2C662B0800F58A05 /* NetworkManager.swift in Sources */,
 				F8D8E0A02C67149C00F58A05 /* Extension + UIImageView.swift in Sources */,

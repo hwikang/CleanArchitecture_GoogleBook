@@ -58,9 +58,11 @@ public class BookListViewModel: BookListViewModelProtocol {
                 searchBooks(query: keyword, filter: filter, pageIndex: pageIndex + 1)
             }.disposed(by: disposeBag)
         
-        let cellData = Observable.combineLatest(input.selectedFilter, bookList, pageFinished).map { selectedFilter, bookList, pageFinished in
+        let cellData = Observable.combineLatest(input.keyword, input.selectedFilter, bookList, pageFinished).map { keyword, selectedFilter, bookList, pageFinished in
             var cellData: [BookListCellData] = []
+            if keyword.isEmpty { return cellData }
             cellData.append(.tab(selectedFilter: selectedFilter))
+            cellData.append(.title)
             cellData += bookList.map { BookListCellData.book(book: $0, bookType: selectedFilter) }
             if !pageFinished { cellData.append(.loading)}
             return cellData
@@ -69,6 +71,7 @@ public class BookListViewModel: BookListViewModelProtocol {
     }
     
     private func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) {
+        guard !query.isEmpty else { return }
         self.pageIndex = pageIndex
         Task {
             loading.accept(true)
@@ -94,13 +97,13 @@ public enum BookListCellData {
     case tab(selectedFilter: BookSearchFilter)
     case book(book: BookListItem, bookType: BookSearchFilter)
     case loading
-    
+    case title
     var cellType: BookListCellType.Type {
         switch self {
         case .tab: TabTableViewCell.self
         case .book: BookListTableViewCell.self
         case .loading: LoadingTableViewCell.self
-
+        case .title: TitleTableViewCell.self
         }
     }
     var id: String {
@@ -108,6 +111,7 @@ public enum BookListCellData {
         case .tab: TabTableViewCell.identifier
         case .book: BookListTableViewCell.identifier
         case .loading: LoadingTableViewCell.identifier
+        case .title: TitleTableViewCell.identifier
         }
     }
 }
