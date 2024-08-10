@@ -20,6 +20,7 @@ public class BookListViewModel: BookListViewModelProtocol {
     private let bookList = PublishRelay<[BookListItem]>()
     private let error = PublishRelay<String>()
     private let pageFinished = PublishRelay<Bool>()
+    private let loading = PublishRelay<Bool>()
     private let disposeBag = DisposeBag()
 
     public init(usecase: BookListUsecaseProtocol) {
@@ -34,9 +35,10 @@ public class BookListViewModel: BookListViewModelProtocol {
     }
     
     public struct Output {
-//        let bookList: Observable<[BookListItem]>
         let cellData: Observable<[BookListCellData]>
         let error: Observable<String>
+        let loading: Observable<Bool>
+
     }
     
     public func transform(input: Input) -> Output {
@@ -53,7 +55,7 @@ public class BookListViewModel: BookListViewModelProtocol {
         input.fetchMoreTrigger.withLatestFrom(queryDataObservable)
             .bind { [weak self] filter, keyword in
                 guard let self = self else { return }
-                searchBooks(query: keyword, filter: filter, pageIndex: pageIndex + 1)
+//                searchBooks(query: keyword, filter: filter, pageIndex: pageIndex + 1)
             }.disposed(by: disposeBag)
         
         let cellData = Observable.combineLatest(input.selectedFilter, bookList, pageFinished).map { selectedFilter, bookList, pageFinished in
@@ -63,13 +65,15 @@ public class BookListViewModel: BookListViewModelProtocol {
             if !pageFinished { cellData.append(.loading)}
             return cellData
         }
-        return Output(cellData: cellData, error: error.asObservable())
+        return Output(cellData: cellData, error: error.asObservable(), loading: loading.asObservable())
     }
     
     private func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) {
         self.pageIndex = pageIndex
         Task {
+            loading.accept(true)
             let result = await usecase.searchBooks(query: query, filter: filter, pageIndex: pageIndex, maxResult: maxResult)
+            loading.accept(false)
             switch result {
             case .success(let bookList):
                 self.bookList.accept(bookList.items)
@@ -89,11 +93,14 @@ public enum BookListCellData {
     
     var cellType: BookListCellType.Type {
         switch self {
+        case .tab: TabTableViewCell.self
         default: BookListTableViewCell.self
+
         }
     }
     var id: String {
         switch self {
+        case .tab: TabTableViewCell.identifier
         default: BookListTableViewCell.identifier
         }
     }

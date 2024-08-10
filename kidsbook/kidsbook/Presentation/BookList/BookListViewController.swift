@@ -12,7 +12,7 @@ import RxCocoa
 
 class BookListViewController: UIViewController {
     private let viewModel: BookListViewModelProtocol
-    private let tabType = BehaviorRelay<BookSearchFilter>(value: .freeEbook)
+    private let selectedTabType = BehaviorRelay<BookSearchFilter>(value: .freeEbook)
     private let disposeBag = DisposeBag()
     private let searchTextfield = SearchTextField()
     private let textfieldBorder = {
@@ -20,10 +20,13 @@ class BookListViewController: UIViewController {
         view.backgroundColor = .gray
         return view
     }()
+    private let pullToRefreshControl = UIRefreshControl()
+
     private let tableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .onDrag
+        tableView.register(TabTableViewCell.self, forCellReuseIdentifier: TabTableViewCell.identifier)
         tableView.register(BookListTableViewCell.self, forCellReuseIdentifier: BookListTableViewCell.identifier)
         return tableView
     }()
@@ -42,23 +45,42 @@ class BookListViewController: UIViewController {
     }
     
     private func bindViewModel() {
+        let refreshTrigger = pullToRefreshControl.rx.controlEvent(.valueChanged).filter {
+            [unowned self] in pullToRefreshControl.isRefreshing
+        }
         let output = viewModel.transform(input: BookListViewModel.Input(
-            keyword: searchTextfield.rx.text.orEmpty.distinctUntilChanged().debounce(.milliseconds(300), scheduler: MainScheduler.instance),
-            selectedFilter: tabType.asObservable(), refreshTrigger: Observable.just(()), fetchMoreTrigger: Observable.just(())))
-        output.cellData.bind(to: tableView.rx.items) { tableView, _, element in
+            keyword: searchTextfield.rx.controlEvent(.editingDidEnd).withLatestFrom(searchTextfield.rx.text.orEmpty),
+            selectedFilter: selectedTabType.asObservable(), refreshTrigger: refreshTrigger, fetchMoreTrigger: Observable.just(())))
+        
+        output.cellData
+            .observe(on: MainScheduler.instance)
+            .bind(to: tableView.rx.items) { tableView, _, element in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: element.id) else { return UITableViewCell() }
             (cell as? BookListCellType)?.apply(cellData: element)
-
+            if let cell = cell as? TabTableViewCell {
+                cell.selectedTab.bind { [weak self] selectedFilter in
+                    self?.selectedTabType.accept(selectedFilter)
+                }.disposed(by: cell.disposeBag)
+            }
             return cell
         }.disposed(by: disposeBag)
                                          
-                                         
+        output.loading.observe(on: MainScheduler.instance)
+            .bind(to: pullToRefreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        output.error.bind { [weak self] error in
+            let alert = UIAlertController(title: "에러", message: error, preferredStyle: .alert)
+            alert.addAction(.init(title: "확인", style: .default))
+            self?.present(alert, animated: true)
+        }.disposed(by: disposeBag)
     }
     
     private func setUI() {
         view.addSubview(searchTextfield)
         view.addSubview(textfieldBorder)
         view.addSubview(tableView)
+        tableView.refreshControl = pullToRefreshControl
         setConstraints()
     }
     

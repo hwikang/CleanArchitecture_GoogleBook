@@ -43,7 +43,9 @@ class BookListTableViewCell : UITableViewCell, BookListCellType {
     func apply(cellData: BookListCellData) {
         guard case let .book(book, bookType) = cellData else { return }
         titleLabel.text = book.title
-        authorLabel.text = book.authors.reduce("", {  $0 + ", " + $1 })
+        authorLabel.text = book.authors.reduce("", { result, author in
+            result.isEmpty ? author : result + ", " + author
+        })
         bookTypeLabel.text = bookType.rawValue
         if let thumbnail = book.thumbnail {
             bookImage.setImage(urlString: thumbnail)
@@ -61,13 +63,14 @@ class BookListTableViewCell : UITableViewCell, BookListCellType {
             contentView.addSubview($0)
         }
         bookImage.snp.makeConstraints { make in
-            make.top.leading.bottom.equalToSuperview()
+            make.top.equalTo(10)
+            make.leading.bottom.equalToSuperview()
             make.width.equalTo(100)
             make.height.equalTo(140)
         }
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(bookImage)
-            make.leading.equalTo(bookImage.snp.trailing)
+            make.leading.equalTo(bookImage.snp.trailing).offset(8)
             make.trailing.equalToSuperview()
         }
         authorLabel.snp.makeConstraints { make in

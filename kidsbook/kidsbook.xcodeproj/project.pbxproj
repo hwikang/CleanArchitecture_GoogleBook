@@ -29,6 +29,7 @@
 		F8D8E09D2C6713D400F58A05 /* BookListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E09C2C6713D400F58A05 /* BookListTableViewCell.swift */; };
 		F8D8E0A02C67149C00F58A05 /* Extension + UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E09F2C67149C00F58A05 /* Extension + UIImageView.swift */; };
 		F8D8E0A32C67157B00F58A05 /* ImageChacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0A22C67157B00F58A05 /* ImageChacheManager.swift */; };
+		F8D8E0C92C6722C300F58A05 /* TabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0C82C6722C300F58A05 /* TabTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		F8D8E09C2C6713D400F58A05 /* BookListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListTableViewCell.swift; sourceTree = "<group>"; };
 		F8D8E09F2C67149C00F58A05 /* Extension + UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + UIImageView.swift"; sourceTree = "<group>"; };
 		F8D8E0A22C67157B00F58A05 /* ImageChacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageChacheManager.swift; sourceTree = "<group>"; };
+		F8D8E0C82C6722C300F58A05 /* TabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 			children = (
 				F8D8E09A2C6711B800F58A05 /* SearchTextField.swift */,
 				F8D8E09C2C6713D400F58A05 /* BookListTableViewCell.swift */,
+				F8D8E0C82C6722C300F58A05 /* TabTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				F8D8E08B2C663B2E00F58A05 /* BookSearchFilter.swift in Sources */,
 				F8D8E08F2C664EF100F58A05 /* BookRepository.swift in Sources */,
 				F8D8E0A32C67157B00F58A05 /* ImageChacheManager.swift in Sources */,
+				F8D8E0C92C6722C300F58A05 /* TabTableViewCell.swift in Sources */,
 				F8D8E0942C66564B00F58A05 /* BookListUsecase.swift in Sources */,
 				F8D8E0532C66299200F58A05 /* kidsbook.xcdatamodeld in Sources */,
 			);
