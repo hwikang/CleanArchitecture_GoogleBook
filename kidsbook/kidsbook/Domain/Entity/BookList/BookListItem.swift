@@ -36,21 +36,23 @@ public struct BookListItem: Decodable {
     let pageCount: Int
     let buyLink: String
     let pdf: PDFData?
+    let textSnippet: String
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case volumeInfo
         case saleInfo
         case accessInfo
+        case searchInfo
     }
-    enum VolumeInfoCodingKeys: String, CodingKey {
+    enum VolumeInfoCodingKeys: CodingKey {
         case title
         case authors
         case pageCount
         case imageLinks
     }
     
-    enum ImageLinksCodingKeys: String, CodingKey {
+    enum ImageLinksCodingKeys: CodingKey {
         case thumbnail
     }
     enum SaleInfoCodingKeys: CodingKey {
@@ -59,18 +61,10 @@ public struct BookListItem: Decodable {
     enum AccessInfoCodingKeys: CodingKey {
         case pdf
     }
-//    public init(from decoder: any Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.identifier = try container.decode(String.self, forKey: .identifier)
-//        let infoContainer = try container.nestedContainer(keyedBy: InfoCodingKeys.self, forKey: .volumeInfo)
-//        self.title = try infoContainer.decode(String.self, forKey: .title)
-//        self.authors = try infoContainer.decodeIfPresent([String].self, forKey: .authors) ?? []
-//        if let imageContainer = try? infoContainer.nestedContainer(keyedBy: ImageLinksCodingKeys.self, forKey: .imageLinks) {
-//            self.thumbnail = try imageContainer.decode(String.self, forKey: .thumbnail)
-//        } else {
-//            self.thumbnail = nil
-//        }
-//    }
+    enum SearchInfoCodingKeys: CodingKey {
+        case textSnippet
+    }
+    
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.identifier = try container.decode(String.self, forKey: .identifier)
@@ -92,6 +86,10 @@ public struct BookListItem: Decodable {
         } else {
             self.pdf = nil
         }
+        
+        let searchInfoContainer = try container.nestedContainer(keyedBy: SearchInfoCodingKeys.self, forKey: .searchInfo)
+        self.textSnippet = try searchInfoContainer.decode(String.self, forKey: .textSnippet)
+
     }
 }
 

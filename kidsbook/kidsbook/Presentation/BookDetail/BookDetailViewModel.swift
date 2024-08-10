@@ -11,28 +11,23 @@ import RxCocoa
 
 protocol BookDetailViewModelProtocol {
     func transform(input: BookDetailViewModel.Input) -> BookDetailViewModel.Output
+    var book: BookListItem { get }
 }
 
 public class BookDetailViewModel: BookDetailViewModelProtocol {
     
-    private let book: BookListItem
-    //    private let book = PublishRelay<BookListItem>()
+    public let book: BookListItem
     private let error = PublishRelay<String>()
     private let loading = PublishRelay<Bool>()
     
     public init(book: BookListItem) {
-        
         self.book = book
-        
     }
     public struct Input {
-        
     }
     
     public struct Output {
-        //        let book: Observable<BookDetail>
         let error: Observable<String>
-        //        let loading: Observable<Bool>
         
     }
     
