@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol BookRepositoryProtocol {
-    func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError>
+    func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int, maxResult: Int) async -> Result<BookList, NetworkError>
 }

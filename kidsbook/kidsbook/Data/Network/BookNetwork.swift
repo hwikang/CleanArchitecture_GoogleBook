@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol BookNetworkProtocol {
-    func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError>
+    func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int, maxResult: Int) async -> Result<BookList, NetworkError>
 }
 
 public struct BookNetwork: BookNetworkProtocol {
@@ -19,8 +19,8 @@ public struct BookNetwork: BookNetworkProtocol {
         self.network = network
     }
     
-    public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError> {
-        let url = "https://www.googleapis.com/books/v1/volumes?q=\(query)&filter=\(filter.rawValue)&startIndex=\(pageIndex)&maxResults=20"
+    public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int, maxResult: Int) async -> Result<BookList, NetworkError> {
+        let url = "https://www.googleapis.com/books/v1/volumes?q=\(query)&filter=\(filter.rawValue)&startIndex=\(pageIndex)&maxResults=\(maxResult)"
         return await network.fetchData(urlString: url, httpMethod: .get, headers: nil)
     }
 }

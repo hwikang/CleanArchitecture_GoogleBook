@@ -13,8 +13,8 @@ public struct BookRepository: BookRepositoryProtocol {
         self.bookNetwork = bookNetwork
     }
     
-    public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError> {
-        await bookNetwork.searchBooks(query: query, filter: filter, pageIndex: pageIndex)
+    public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int, maxResult: Int) async -> Result<BookList, NetworkError> {
+        await bookNetwork.searchBooks(query: query, filter: filter, pageIndex: pageIndex, maxResult: maxResult)
     }
     
 }

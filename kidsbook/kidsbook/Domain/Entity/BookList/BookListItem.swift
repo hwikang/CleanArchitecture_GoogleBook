@@ -32,7 +32,7 @@ public struct BookListItem: Decodable {
     let identifier: String
     let title: String
     let authors: [String]
-    let thumbnail: URL?
+    let thumbnail: String?
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
@@ -54,8 +54,7 @@ public struct BookListItem: Decodable {
         self.title = try infoContainer.decode(String.self, forKey: .title)
         self.authors = try infoContainer.decodeIfPresent([String].self, forKey: .authors) ?? []
         if let imageContainer = try? infoContainer.nestedContainer(keyedBy: ImageLinksCodingKeys.self, forKey: .imageLinks) {
-            let imageURLString = try imageContainer.decode(String.self, forKey: .thumbnail)
-            self.thumbnail = URL(string: imageURLString)
+            self.thumbnail = try imageContainer.decode(String.self, forKey: .thumbnail)
         } else {
             self.thumbnail = nil
         }

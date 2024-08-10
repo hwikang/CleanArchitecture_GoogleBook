@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol BookListUsecaseProtocol {
-    func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError>
+    func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int, maxResult: Int) async -> Result<BookList, NetworkError>
 }
 public struct BookListUsecase: BookListUsecaseProtocol {
     
@@ -17,8 +17,8 @@ public struct BookListUsecase: BookListUsecaseProtocol {
         self.repository = repository
     }
     
-    public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int) async -> Result<BookList, NetworkError> {
-        await repository.searchBooks(query: query, filter: filter, pageIndex: pageIndex)
+    public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int, maxResult: Int) async -> Result<BookList, NetworkError> {
+        await repository.searchBooks(query: query, filter: filter, pageIndex: pageIndex, maxResult: maxResult)
     }
     
 }
