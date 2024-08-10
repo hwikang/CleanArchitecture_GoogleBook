@@ -38,13 +38,17 @@ class BookListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
       
         setUI()
         bindViewModel()
-
+        bindView()
     }
     
     private func bindViewModel() {
@@ -81,6 +85,15 @@ class BookListViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
+    private func bindView() {
+        tableView.rx.modelSelected(BookListCellData.self).bind { [weak self] cellData in
+            if case let .book(book , _) = cellData {
+                self?.pushBookDetailVC(book: book)
+
+            }
+        }.disposed(by: disposeBag)
+    }
+    
     private func setUI() {
         view.addSubview(searchTextfield)
         view.addSubview(textfieldBorder)
@@ -104,6 +117,13 @@ class BookListViewController: UIViewController {
             make.top.equalTo(textfieldBorder.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    private func pushBookDetailVC(book: BookListItem) {
+       
+        let bookVM = BookDetailViewModel(book: book)
+        let BookVC = BookDetailViewController(viewModel: bookVM)
+        navigationController?.pushViewController(BookVC, animated: true)
     }
 
     required init?(coder: NSCoder) {

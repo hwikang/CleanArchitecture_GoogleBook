@@ -38,6 +38,7 @@ final class BookListTableViewCell : UITableViewCell, BookListCellType {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUI()
+        selectionStyle = .none
     }
     
     func apply(cellData: BookListCellData) {

@@ -8,13 +8,12 @@
 import Foundation
 public struct BookRepository: BookRepositoryProtocol {
     
-    private let bookNetwork: BookNetwork
-    public init(bookNetwork: BookNetwork) {
+    private let bookNetwork: BookNetworkProtocol
+    public init(bookNetwork: BookNetworkProtocol) {
         self.bookNetwork = bookNetwork
     }
     
     public func searchBooks(query: String, filter: BookSearchFilter, pageIndex: Int, maxResult: Int) async -> Result<BookList, NetworkError> {
         await bookNetwork.searchBooks(query: query, filter: filter, pageIndex: pageIndex, maxResult: maxResult)
     }
-    
 }

@@ -25,8 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let bookListUC = BookListUsecase(repository: BookRP)
         let bookListVM = BookListViewModel(usecase: bookListUC)
         let bookListVC = BookListViewController(viewModel: bookListVM)
+        let rootVC = UINavigationController()
+        rootVC.viewControllers = [bookListVC]
+        
         window?.backgroundColor = .white
-        window?.rootViewController = bookListVC
+        window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
 
