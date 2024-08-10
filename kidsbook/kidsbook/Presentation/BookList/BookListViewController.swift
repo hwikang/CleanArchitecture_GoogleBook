@@ -28,6 +28,7 @@ class BookListViewController: UIViewController {
         tableView.keyboardDismissMode = .onDrag
         tableView.register(TabTableViewCell.self, forCellReuseIdentifier: TabTableViewCell.identifier)
         tableView.register(BookListTableViewCell.self, forCellReuseIdentifier: BookListTableViewCell.identifier)
+        tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: LoadingTableViewCell.identifier)
         return tableView
     }()
     
@@ -42,6 +43,15 @@ class BookListViewController: UIViewController {
       
         setUI()
         bindViewModel()
+        let test = tableView.rx.willDisplayCell.filter { $0.cell is LoadingTableViewCell }.map { _ in () }
+//            .bind(onNext: { [weak self] displayCell in
+//                if displayCell.cell is LoadingCell {
+//                    self?.viewModel.getParticipationHistories(isPagination: true, isFromRefreshControl: false)
+//                }
+//            })
+//            .disposed(by: disposeBag)
+
+
     }
     
     private func bindViewModel() {
@@ -50,7 +60,9 @@ class BookListViewController: UIViewController {
         }
         let output = viewModel.transform(input: BookListViewModel.Input(
             keyword: searchTextfield.rx.controlEvent(.editingDidEnd).withLatestFrom(searchTextfield.rx.text.orEmpty),
-            selectedFilter: selectedTabType.asObservable(), refreshTrigger: refreshTrigger, fetchMoreTrigger: Observable.just(())))
+            selectedFilter: selectedTabType.asObservable(), refreshTrigger: refreshTrigger,
+            fetchMoreTrigger: tableView.rx.willDisplayCell.filter { $0.cell is LoadingTableViewCell }
+                .debounce(.milliseconds(1000), scheduler: MainScheduler.instance).map { _ in () }))
         
         output.cellData
             .observe(on: MainScheduler.instance)

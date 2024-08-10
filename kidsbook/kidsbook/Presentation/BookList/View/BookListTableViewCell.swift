@@ -7,28 +7,28 @@
 
 import UIKit
 
-class BookListTableViewCell : UITableViewCell, BookListCellType {
+final class BookListTableViewCell : UITableViewCell, BookListCellType {
  
     static let identifier = "BookListTableViewCell"
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.numberOfLines = 2
 
         return label
     }()
-    let authorLabel: UILabel = {
+    private let authorLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         return label
     }()
-    let bookTypeLabel: UILabel = {
+    private let bookTypeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         return label
     }()
    
-    let bookImage: UIImageView = {
+    private let bookImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "placeholder")
         imageView.contentMode = .scaleAspectFit

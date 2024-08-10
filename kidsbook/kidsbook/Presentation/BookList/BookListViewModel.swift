@@ -17,7 +17,7 @@ public class BookListViewModel: BookListViewModelProtocol {
     private let usecase: BookListUsecaseProtocol
     private var pageIndex = 0   
     private let maxResult = 30
-    private let bookList = PublishRelay<[BookListItem]>()
+    private let bookList = BehaviorRelay<[BookListItem]>(value: [])
     private let error = PublishRelay<String>()
     private let pageFinished = PublishRelay<Bool>()
     private let loading = PublishRelay<Bool>()
@@ -55,7 +55,7 @@ public class BookListViewModel: BookListViewModelProtocol {
         input.fetchMoreTrigger.withLatestFrom(queryDataObservable)
             .bind { [weak self] filter, keyword in
                 guard let self = self else { return }
-//                searchBooks(query: keyword, filter: filter, pageIndex: pageIndex + 1)
+                searchBooks(query: keyword, filter: filter, pageIndex: pageIndex + 1)
             }.disposed(by: disposeBag)
         
         let cellData = Observable.combineLatest(input.selectedFilter, bookList, pageFinished).map { selectedFilter, bookList, pageFinished in
@@ -76,7 +76,11 @@ public class BookListViewModel: BookListViewModelProtocol {
             loading.accept(false)
             switch result {
             case .success(let bookList):
-                self.bookList.accept(bookList.items)
+                if pageIndex == 1 {
+                    self.bookList.accept(bookList.items)
+                } else {
+                    self.bookList.accept(self.bookList.value + bookList.items)
+                }
 
                 pageFinished.accept(bookList.items.count < maxResult)
             case .failure(let error):
@@ -94,14 +98,16 @@ public enum BookListCellData {
     var cellType: BookListCellType.Type {
         switch self {
         case .tab: TabTableViewCell.self
-        default: BookListTableViewCell.self
+        case .book: BookListTableViewCell.self
+        case .loading: LoadingTableViewCell.self
 
         }
     }
     var id: String {
         switch self {
         case .tab: TabTableViewCell.identifier
-        default: BookListTableViewCell.identifier
+        case .book: BookListTableViewCell.identifier
+        case .loading: LoadingTableViewCell.identifier
         }
     }
 }

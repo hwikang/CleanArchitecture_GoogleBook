@@ -10,7 +10,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class TabTableViewCell : UITableViewCell, BookListCellType {
+final class TabTableViewCell : UITableViewCell, BookListCellType {
  
     static let identifier = "TabTableViewCell"
     public let selectedTab = PublishRelay<BookSearchFilter>()
@@ -89,7 +89,6 @@ class TabTableViewCell : UITableViewCell, BookListCellType {
     }
     
     private func setUI() {
-
         [freeEbookTab, paidEbookTab, borderView, underBarView].forEach { contentView.addSubview($0) }
         freeEbookTab.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
