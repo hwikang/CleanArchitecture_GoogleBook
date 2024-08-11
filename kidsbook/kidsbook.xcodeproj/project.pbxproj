@@ -34,6 +34,9 @@
 		F8D8E0CD2C6737C700F58A05 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0CC2C6737C700F58A05 /* TitleTableViewCell.swift */; };
 		F8D8E0D42C6741EF00F58A05 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0D32C6741EF00F58A05 /* BookDetailViewModel.swift */; };
 		F8D8E0D62C67430300F58A05 /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0D52C67430300F58A05 /* BookDetailViewController.swift */; };
+		F8D8E0D92C6867EC00F58A05 /* BookDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0D82C6867EC00F58A05 /* BookDetailHeaderView.swift */; };
+		F8D8E0DB2C6870A500F58A05 /* BookDetailLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0DA2C6870A500F58A05 /* BookDetailLinkView.swift */; };
+		F8D8E0E22C68759D00F58A05 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8E0E12C68759D00F58A05 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,9 @@
 		F8D8E0CC2C6737C700F58A05 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		F8D8E0D32C6741EF00F58A05 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		F8D8E0D52C67430300F58A05 /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		F8D8E0D82C6867EC00F58A05 /* BookDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailHeaderView.swift; sourceTree = "<group>"; };
+		F8D8E0DA2C6870A500F58A05 /* BookDetailLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailLinkView.swift; sourceTree = "<group>"; };
+		F8D8E0E12C68759D00F58A05 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +248,7 @@
 		F8D8E0952C66570300F58A05 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F8D8E0DC2C6871F400F58A05 /* Common */,
 				F8D8E0D22C6741E500F58A05 /* BookDetail */,
 				F8D8E0962C66570E00F58A05 /* BookList */,
 			);
@@ -289,10 +296,28 @@
 		F8D8E0D22C6741E500F58A05 /* BookDetail */ = {
 			isa = PBXGroup;
 			children = (
+				F8D8E0D72C6867E000F58A05 /* View */,
 				F8D8E0D32C6741EF00F58A05 /* BookDetailViewModel.swift */,
 				F8D8E0D52C67430300F58A05 /* BookDetailViewController.swift */,
 			);
 			path = BookDetail;
+			sourceTree = "<group>";
+		};
+		F8D8E0D72C6867E000F58A05 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E0D82C6867EC00F58A05 /* BookDetailHeaderView.swift */,
+				F8D8E0DA2C6870A500F58A05 /* BookDetailLinkView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F8D8E0DC2C6871F400F58A05 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8E0E12C68759D00F58A05 /* WebViewController.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -467,9 +492,12 @@
 				F8D8E04D2C66299200F58A05 /* BookListViewController.swift in Sources */,
 				F8D8E0D62C67430300F58A05 /* BookDetailViewController.swift in Sources */,
 				F8D8E0882C662C5300F58A05 /* BookListItem.swift in Sources */,
+				F8D8E0DB2C6870A500F58A05 /* BookDetailLinkView.swift in Sources */,
 				F8D8E0492C66299200F58A05 /* AppDelegate.swift in Sources */,
+				F8D8E0D92C6867EC00F58A05 /* BookDetailHeaderView.swift in Sources */,
 				F8D8E09B2C6711B800F58A05 /* SearchTextField.swift in Sources */,
 				F8D8E0CD2C6737C700F58A05 /* TitleTableViewCell.swift in Sources */,
+				F8D8E0E22C68759D00F58A05 /* WebViewController.swift in Sources */,
 				F8D8E0982C66572200F58A05 /* BookListViewModel.swift in Sources */,
 				F8D8E07E2C662B0800F58A05 /* NetworkManager.swift in Sources */,
 				F8D8E0A02C67149C00F58A05 /* Extension + UIImageView.swift in Sources */,

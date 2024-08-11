@@ -33,10 +33,10 @@ public struct BookListItem: Decodable {
     let title: String
     let authors: [String]
     let thumbnail: String?
-    let pageCount: Int
+    let pageCount: Int?
     let buyLink: String
     let pdf: PDFData?
-    let textSnippet: String
+    let textSnippet: String?
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
@@ -71,8 +71,7 @@ public struct BookListItem: Decodable {
         let volumeInfoContainer = try container.nestedContainer(keyedBy: VolumeInfoCodingKeys.self, forKey: .volumeInfo)
         self.title = try volumeInfoContainer.decode(String.self, forKey: .title)
         self.authors = try volumeInfoContainer.decodeIfPresent([String].self, forKey: .authors) ?? []
-        self.pageCount = try volumeInfoContainer.decode(Int.self, forKey: .pageCount
-        )
+        self.pageCount = try volumeInfoContainer.decodeIfPresent(Int.self, forKey: .pageCount)
         if let imageContainer = try? volumeInfoContainer.nestedContainer(keyedBy: ImageLinksCodingKeys.self, forKey: .imageLinks) {
             self.thumbnail = try imageContainer.decode(String.self, forKey: .thumbnail)
         } else {
@@ -87,8 +86,11 @@ public struct BookListItem: Decodable {
             self.pdf = nil
         }
         
-        let searchInfoContainer = try container.nestedContainer(keyedBy: SearchInfoCodingKeys.self, forKey: .searchInfo)
-        self.textSnippet = try searchInfoContainer.decode(String.self, forKey: .textSnippet)
+        if let searchInfoContainer = try? container.nestedContainer(keyedBy: SearchInfoCodingKeys.self, forKey: .searchInfo) {
+            self.textSnippet = try searchInfoContainer.decode(String.self, forKey: .textSnippet)
+        } else {
+            self.textSnippet = nil
+        }
 
     }
 }
