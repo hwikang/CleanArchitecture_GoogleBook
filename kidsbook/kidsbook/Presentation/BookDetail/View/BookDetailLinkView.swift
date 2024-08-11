@@ -63,12 +63,12 @@ final class BookDetailLinkView: UIView {
     
     private func setUI() {
         [buttonStackView, infoImageView, infoLabel, borderView].forEach { addSubview($0) }
-        
+        [sampleButton, buyLinkButton].forEach { buttonStackView.addArrangedSubview($0) }
         if hasSample {
-            buttonStackView.addArrangedSubview(sampleButton)
+            sampleButton.isHidden = false
+        } else {
+            sampleButton.isHidden = true
         }
-        buttonStackView.addArrangedSubview(buyLinkButton)
-
         setConstraints()
     }
     

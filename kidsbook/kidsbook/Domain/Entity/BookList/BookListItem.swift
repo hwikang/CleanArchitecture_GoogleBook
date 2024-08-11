@@ -23,7 +23,7 @@ public struct BookList: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.totalItems = try container.decode(Int.self, forKey: CodingKeys.totalItems)
-        items = try container.decode([BookListItem].self, forKey: CodingKeys.items)
+        items = try container.decodeIfPresent([BookListItem].self, forKey: CodingKeys.items) ?? []
     }
    
 }
@@ -32,11 +32,12 @@ public struct BookListItem: Decodable {
     let identifier: String
     let title: String
     let authors: [String]
+    let description: String?
+
     let thumbnail: String?
     let pageCount: Int?
     let buyLink: String
     let pdf: PDFData?
-    let textSnippet: String?
     
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
@@ -49,6 +50,7 @@ public struct BookListItem: Decodable {
         case title
         case authors
         case pageCount
+        case description
         case imageLinks
     }
     
@@ -72,6 +74,8 @@ public struct BookListItem: Decodable {
         self.title = try volumeInfoContainer.decode(String.self, forKey: .title)
         self.authors = try volumeInfoContainer.decodeIfPresent([String].self, forKey: .authors) ?? []
         self.pageCount = try volumeInfoContainer.decodeIfPresent(Int.self, forKey: .pageCount)
+        self.description = try volumeInfoContainer.decodeIfPresent(String.self, forKey: .description)
+        
         if let imageContainer = try? volumeInfoContainer.nestedContainer(keyedBy: ImageLinksCodingKeys.self, forKey: .imageLinks) {
             self.thumbnail = try imageContainer.decode(String.self, forKey: .thumbnail)
         } else {
@@ -86,11 +90,8 @@ public struct BookListItem: Decodable {
             self.pdf = nil
         }
         
-        if let searchInfoContainer = try? container.nestedContainer(keyedBy: SearchInfoCodingKeys.self, forKey: .searchInfo) {
-            self.textSnippet = try searchInfoContainer.decode(String.self, forKey: .textSnippet)
-        } else {
-            self.textSnippet = nil
-        }
+       
+        
 
     }
 }

@@ -17,7 +17,8 @@ class BookDetailViewController: UIViewController {
         return stackView
     }()
     private lazy var headerView = BookDetailHeaderView(book: viewModel.book)
-    private lazy var linkView = BookDetailLinkView(hasSample: viewModel.book.pdf?.isAvailable == true)
+    private lazy var linkView = BookDetailLinkView(hasSample: viewModel.book.pdf?.downloadLink != nil)
+    private lazy var descriptionView = BookDetailDescriptionView(descriptionString: viewModel.book.description)
     init(viewModel: BookDetailViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -46,11 +47,17 @@ class BookDetailViewController: UIViewController {
                 self?.pushWebVC(link: link)
             }
         }.disposed(by: disposeBag)
+        descriptionView.descriptionButton.rx.tap.bind { [weak self] in
+            if let desctiption = self?.viewModel.book.description {
+                self?.pushTextVC(text: desctiption)
+            }
+        }.disposed(by: disposeBag)
     }
     private func setUI() {
         view.backgroundColor = .white
         view.addSubview(stackView)
-        [headerView, linkView].forEach { stackView.addArrangedSubview($0) }
+        [headerView, linkView, descriptionView].forEach { stackView.addArrangedSubview($0) }
+        
         setConstraints()
     }
     
@@ -64,10 +71,12 @@ class BookDetailViewController: UIViewController {
     private func pushWebVC(link: String) {
         let webVC = WebViewController(url: link)
         navigationController?.pushViewController(webVC, animated: true)
-
+    }
+    private func pushTextVC(text: String) {
+        let textVC = TextViewController(text: text)
+        navigationController?.pushViewController(textVC, animated: true)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
