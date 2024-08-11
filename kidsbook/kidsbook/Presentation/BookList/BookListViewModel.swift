@@ -58,12 +58,17 @@ public class BookListViewModel: BookListViewModelProtocol {
                 searchBooks(query: keyword, filter: filter, pageIndex: pageIndex + 1)
             }.disposed(by: disposeBag)
         
-        let cellData = Observable.combineLatest(input.keyword, input.selectedFilter, bookList, pageFinished).map { keyword, selectedFilter, bookList, pageFinished in
+        let cellData = Observable.combineLatest(input.keyword, input.selectedFilter, bookList, pageFinished, loading).map { keyword, selectedFilter, bookList, pageFinished, loading in
             var cellData: [BookListCellData] = []
             if keyword.isEmpty { return cellData }
             cellData.append(.tab(selectedFilter: selectedFilter))
             cellData.append(.title)
-            cellData += bookList.map { BookListCellData.book(book: $0, bookType: selectedFilter) }
+            
+            if bookList.isEmpty && !loading {
+                cellData.append(.empty(filter: selectedFilter))
+            } else {
+                cellData += bookList.map { BookListCellData.book(book: $0, bookType: selectedFilter) }
+            }
             if !pageFinished { cellData.append(.loading)}
             return cellData
         }
@@ -98,12 +103,14 @@ public enum BookListCellData {
     case book(book: BookListItem, bookType: BookSearchFilter)
     case loading
     case title
+    case empty(filter: BookSearchFilter)
     var cellType: BookListCellType.Type {
         switch self {
         case .tab: TabTableViewCell.self
         case .book: BookListTableViewCell.self
         case .loading: LoadingTableViewCell.self
         case .title: TitleTableViewCell.self
+        case .empty: EmptyResultTableViewCell.self
         }
     }
     var id: String {
@@ -112,6 +119,8 @@ public enum BookListCellData {
         case .book: BookListTableViewCell.identifier
         case .loading: LoadingTableViewCell.identifier
         case .title: TitleTableViewCell.identifier
+        case .empty: EmptyResultTableViewCell.identifier
+
         }
     }
 }

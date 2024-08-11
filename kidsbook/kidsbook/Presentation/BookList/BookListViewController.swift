@@ -30,6 +30,7 @@ class BookListViewController: UIViewController {
         tableView.register(BookListTableViewCell.self, forCellReuseIdentifier: BookListTableViewCell.identifier)
         tableView.register(LoadingTableViewCell.self, forCellReuseIdentifier: LoadingTableViewCell.identifier)
         tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
+        tableView.register(EmptyResultTableViewCell.self, forCellReuseIdentifier: EmptyResultTableViewCell.identifier)
         return tableView
     }()
     
@@ -75,6 +76,7 @@ class BookListViewController: UIViewController {
         }.disposed(by: disposeBag)
                                          
         output.loading.observe(on: MainScheduler.instance)
+            .filter { [unowned self] _ in pullToRefreshControl.isRefreshing }
             .bind(to: pullToRefreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
         

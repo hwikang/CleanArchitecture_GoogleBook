@@ -11,6 +11,11 @@ import RxSwift
 class BookDetailViewController: UIViewController {
     private let viewModel: BookDetailViewModelProtocol
     private let disposeBag = DisposeBag()
+    private let shareButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        return button
+    }()
     private let stackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -37,6 +42,19 @@ class BookDetailViewController: UIViewController {
     }
     
     private func bindView() {
+        shareButton.rx.tap.bind { [weak self] in
+            guard let self = self else { return }
+            let shareText = "\(viewModel.book.title) 사러 가기\n 링크 - \(viewModel.book.buyLink)"
+            var shareObject = [Any]()
+            shareObject.append(shareText)
+            let activityViewController = UIActivityViewController(activityItems: shareObject,
+                                                                  applicationActivities: nil)
+            present(activityViewController, animated: true)
+//            DispatchQueue.main.async { [weak self] in
+//
+//            }
+
+        }.disposed(by: disposeBag)
         linkView.buyLinkButton.rx.tap.bind { [weak self] in
             if let link = self?.viewModel.book.buyLink {
                 self?.pushWebVC(link: link)
@@ -55,6 +73,7 @@ class BookDetailViewController: UIViewController {
     }
     private func setUI() {
         view.backgroundColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareButton)
         view.addSubview(stackView)
         [headerView, linkView, descriptionView].forEach { stackView.addArrangedSubview($0) }
         

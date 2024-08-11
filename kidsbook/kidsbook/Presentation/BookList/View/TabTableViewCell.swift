@@ -19,7 +19,7 @@ final class TabTableViewCell : UITableViewCell, BookListCellType {
 
     private let freeEbookTab: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle(BookSearchFilter.freeEbook.rawValue, for: .normal)
+        button.setTitle(BookSearchFilter.freeEbook.title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.setTitleColor(.gray, for: .normal)
         button.setTitleColor(.black, for: .selected)
@@ -28,7 +28,7 @@ final class TabTableViewCell : UITableViewCell, BookListCellType {
     }()
     private let paidEbookTab: UIButton = {
         let button = UIButton(type: .custom)
-        button.setTitle(BookSearchFilter.paidEbook.rawValue, for: .normal)
+        button.setTitle(BookSearchFilter.paidEbook.title, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14)
         button.setTitleColor(.gray, for: .normal)
         button.setTitleColor(.black, for: .selected)

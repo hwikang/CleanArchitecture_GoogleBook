@@ -47,7 +47,7 @@ final class BookListTableViewCell : UITableViewCell, BookListCellType {
         authorLabel.text = book.authors.reduce("", { result, author in
             result.isEmpty ? author : result + ", " + author
         })
-        bookTypeLabel.text = bookType.rawValue
+        bookTypeLabel.text = bookType.title
         if let thumbnail = book.thumbnail {
             bookImage.setImage(urlString: thumbnail)
         }
