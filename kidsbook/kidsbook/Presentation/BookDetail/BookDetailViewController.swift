@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 class BookDetailViewController: UIViewController {
-    private let viewModel: BookDetailViewModelProtocol
+    private let book: BookListItem
     private let disposeBag = DisposeBag()
     private let shareButton = {
         let button = UIButton()
@@ -21,11 +21,11 @@ class BookDetailViewController: UIViewController {
         stackView.axis = .vertical
         return stackView
     }()
-    private lazy var headerView = BookDetailHeaderView(book: viewModel.book)
-    private lazy var linkView = BookDetailLinkView(hasSample: viewModel.book.pdf?.downloadLink != nil)
-    private lazy var descriptionView = BookDetailDescriptionView(descriptionString: viewModel.book.description)
-    init(viewModel: BookDetailViewModelProtocol) {
-        self.viewModel = viewModel
+    private lazy var headerView = BookDetailHeaderView(book: book)
+    private lazy var linkView = BookDetailLinkView(hasSample: book.pdf?.downloadLink != nil)
+    private lazy var descriptionView = BookDetailDescriptionView(descriptionString: book.description)
+    init(book: BookListItem) {
+        self.book = book
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,30 +43,20 @@ class BookDetailViewController: UIViewController {
     
     private func bindView() {
         shareButton.rx.tap.bind { [weak self] in
-            guard let self = self else { return }
-            let shareText = "\(viewModel.book.title) 사러 가기\n 링크 - \(viewModel.book.buyLink)"
-            var shareObject = [Any]()
-            shareObject.append(shareText)
-            let activityViewController = UIActivityViewController(activityItems: shareObject,
-                                                                  applicationActivities: nil)
-            present(activityViewController, animated: true)
-//            DispatchQueue.main.async { [weak self] in
-//
-//            }
-
+            self?.presentShareActivity()
         }.disposed(by: disposeBag)
         linkView.buyLinkButton.rx.tap.bind { [weak self] in
-            if let link = self?.viewModel.book.buyLink {
+            if let link = self?.book.buyLink {
                 self?.pushWebVC(link: link)
             }
         }.disposed(by: disposeBag)
         linkView.sampleButton.rx.tap.bind { [weak self] in
-            if let link = self?.viewModel.book.pdf?.downloadLink {
+            if let link = self?.book.pdf?.downloadLink {
                 self?.pushWebVC(link: link)
             }
         }.disposed(by: disposeBag)
         descriptionView.descriptionButton.rx.tap.bind { [weak self] in
-            if let desctiption = self?.viewModel.book.description {
+            if let desctiption = self?.book.description {
                 self?.pushTextVC(text: desctiption)
             }
         }.disposed(by: disposeBag)
@@ -94,6 +84,15 @@ class BookDetailViewController: UIViewController {
     private func pushTextVC(text: String) {
         let textVC = TextViewController(text: text)
         navigationController?.pushViewController(textVC, animated: true)
+    }
+    private func presentShareActivity() {
+        guard let self = self else { return }
+        let shareText = "\(book.title) 사러 가기\n 링크 - \(book.buyLink)"
+        var shareObject = [Any]()
+        shareObject.append(shareText)
+        let activityViewController = UIActivityViewController(activityItems: shareObject,
+                                                              applicationActivities: nil)
+        present(activityViewController, animated: true)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

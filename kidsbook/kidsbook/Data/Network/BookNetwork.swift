@@ -13,7 +13,6 @@ public protocol BookNetworkProtocol {
 
 public struct BookNetwork: BookNetworkProtocol {
     private let network: NetworkManagerProtocol
-    private let endPoint = "https://api.itbook.store/1.0"
     
     public init(network: NetworkManagerProtocol) {
         self.network = network

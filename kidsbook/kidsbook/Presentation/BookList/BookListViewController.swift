@@ -122,9 +122,7 @@ class BookListViewController: UIViewController {
     }
     
     private func pushBookDetailVC(book: BookListItem) {
-       
-        let bookVM = BookDetailViewModel(book: book)
-        let BookVC = BookDetailViewController(viewModel: bookVM)
+        let BookVC = BookDetailViewController(book: book)
         navigationController?.pushViewController(BookVC, animated: true)
     }
 
